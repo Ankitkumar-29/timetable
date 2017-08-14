@@ -1,5 +1,10 @@
 <?php
+include 'validate.php';
+include 'dbconn.php';
 
+      if(!validate()){
+        header("Location: ../index.php");
+      }
  ?>
 <html>
   <head>

@@ -1,11 +1,11 @@
 <?php
-$dbserver="localhost";
-$dbusername="root"
-$dbpass="";
+$server="localhost";
+$dbusername="root";
+$dbuserpass="";
 $dbname="timetable";
 
-$conn = new mysqli($dbserver,$dbusername,$dbpass,$dbname);
-if($conn->$connect_error)
+$conn=new mysqli($server,$dbusername,$dbuserpass,$dbname);
+if($conn->errno)
 {
   echo 'Something went wrong';
 }
