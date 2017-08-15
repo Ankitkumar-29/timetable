@@ -40,10 +40,29 @@ include 'dbconn.php';
              <img src="../sources/images/logos/logoiimt.png" alt="">
             </div>
           </li>
-          <li><a class="waves-effect" href="#!"  id="logout">Logout</a></li>
-          <li><div class="divider"></div></li>
-
+          <?php
+              include "dbconn.php";
+             $qry="SELECT * FROM rights where type='".$_SESSION["type"]."' OR type='both'";
+             $res=$conn->query($qry);
+             if(mysqli_num_rows($res)>0){
+               while($row = $res->fetch_assoc()){
+          ?>
+                <li><a class="waves-effect menubar" data-value="<?php echo $row['pagename'];?>" href="#!"><?php echo $row['function']; ?></a></li>
+                <li><div class="divider"></div></li>
+          <?php
+               }
+             }
+          ?>
+             <li><a class="waves-effect" href="#!"  id="logout">Logout</a></li>
+             <li><div class="divider"></div></li>
         </ul>
+     </div>
+
+     <div class="row">
+       <div id="maincontainer" class="col l12">
+         This is main container
+       </div>
+
      </div>
 
 
@@ -65,6 +84,10 @@ include 'dbconn.php';
           });
         });
 
+        $(".menubar").click(function(){
+            $("#maincontainer").load($(this).data("value")+".php");
+             $("#sidenavshow").trigger("click");
+        });
 
     });
   </script>
