@@ -15,6 +15,7 @@ include 'dbconn.php';
       <link href="../css/style.css" rel="stylesheet" type="text/css">
       <link  rel="stylesheet" href="../fonts/icons/icon.woff2" >
       <script type="text/javascript" src="../js/jquery.js"></script>
+      <script type="text/javascript" src="../js/cookiejs.js"></script>
       <script type="text/javascript" src="../js/materialize.js"></script>
 
   </head>
@@ -39,11 +40,9 @@ include 'dbconn.php';
              <img src="../sources/images/logos/logoiimt.png" alt="">
             </div>
           </li>
-          <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-          <li><a href="#!">Second Link</a></li>
+          <li><a class="waves-effect" href="#!"  id="logout">Logout</a></li>
           <li><div class="divider"></div></li>
-          <li><a class="subheader">Subheader</a></li>
-          <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+
         </ul>
      </div>
 
@@ -54,6 +53,18 @@ include 'dbconn.php';
     $(document).ready(function(){
 
        $(".button-collapse").sideNav();
+
+       $("#logout").click(function() {
+         var x=Cookies.get("userid");
+         $.post("logout.php",{id:x},function(data){
+            if(data==1)
+            {
+              alert("You are succcessfully logout");
+              window.open("../index.php","_self");
+            }
+          });
+        });
+
 
     });
   </script>
