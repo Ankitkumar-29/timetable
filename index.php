@@ -59,9 +59,7 @@ include 'bin/validate.php';
 
          $("#login").click(function(){
 
-           // var usrid=$("#first_name").val();
-           // var passwd=$("#password").val();
-
+        
            $.post("bin/loginvalidate.php",{userid:$("#username").val(),pass:$("#passwd").val()},function(data){
 
              if(data=="success"){

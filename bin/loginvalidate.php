@@ -18,14 +18,14 @@ if(mysqli_num_rows($rs)>0){
   {
     $sessionid=session_id();
 
-    $qry ="delete * from active_session where userid='$userid' and sessionid='$sessionid'";
+    $qry ="delete from active_session where userid='$userid' and sessionid='$sessionid'";
     $conn->query($qry);
 
     $qry ="insert into active_session values('$sessionid','$userid')";
     $conn->query($qry);
 
      setcookie("userid",$userid,time()+86400*30);
-     setcookie("livesession",$sessionid,time()+84600*30);
+     setcookie("PHPSESSID",session_id(),time()+84600*30);
      echo "success";
 
   }

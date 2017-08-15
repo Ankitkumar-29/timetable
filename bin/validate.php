@@ -1,12 +1,11 @@
 <?php
 session_start();
-
 function validate()
 {
-  if(isset($_COOKIE["livesession"])&&isset($_COOKIE["userid"]))
+  if(isset($_COOKIE["PHPSESSID"])&&isset($_COOKIE["userid"]))
   {
     $userid=$_COOKIE["userid"];
-    $sessid=$_COOKIE["livesession"];
+    $sessid=$_COOKIE["PHPSESSID"];
 
     include 'dbconn.php';
 
@@ -21,17 +20,17 @@ function validate()
         $_SESSION["userid"]=$userid;
         $_SESSION["type"]=$r["type"];
         $_SESSION["email"]=$r["email"];
-      return 1;
       }
       return 1;
     }
     else {
-      // setcookie("livesession","",time()-3600);
-      // setcookie("userid","",time()-3600);
+      setcookie("PHPSESSID","",time()-3600);
+      setcookie("userid","",time()-3600);
       return 0;
     }
   }
   else {
     return 0;
   }
-}?>
+}
+?>
