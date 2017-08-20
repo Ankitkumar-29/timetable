@@ -26,8 +26,9 @@ include 'bin/validate.php';
           <div class="center" style="color:white; padding-top:5; font-family:Arial; font-weight:bold; font-size:200%;">TIME TABLE</div>
         </nav>
       </div>
-      <div class="col l6 right" style="margin-top:10%;">
-            <div   style="padding-right:50px">
+
+      <div id="log_page" class="col l6 right" style="margin-top:10%;">
+            <div style="padding-right:50px">
                 <form class="login-form">
                   <div class="row margin">
                       <div class="input-field col s12">
@@ -44,22 +45,47 @@ include 'bin/validate.php';
                         <label for="passwd">Password</label>
                       </div>
                     </div>
-                  <div class="center">
+                    <div class="center">
+
+                    </div>
+                    <div class="center">
                     <a id="login" class="btn" href="#">Login</a>
+                    <a id="reg" href="#"><span style="margin-left:6%;">Register</span></a>
                   </div>
                 </form>
             </div>
-       </div>
+          </div>
 
-   <script type="text/javascript">
+          <!-- register page  -->
+          <div id="register_page" class="col l6 right" style="margin-top:10%;">
+                <div style="padding-right:50px">
+                    <form class="login-form">
+                      <div class="row margin">
+                          <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="username" type="text">
+                            <label for="username">Username</label>
+                          </div>
+                        </div>
+                        <div class="center">
+
+                      </div>
+                        <div class="center">
+                        <a id="Register" class="btn" href="#">Register</a>
+                        <a id="log" href="#"><span style="margin-left:6%;">Login</span></a>
+                        </div>
+                    </form>
+                </div>
+              </div>
 
 
+<script type="text/javascript">
        $(document).ready(function() {
 
-
+         $("#register_page").hide();
          $("#login").click(function(){
 
-        
+
            $.post("bin/loginvalidate.php",{userid:$("#username").val(),pass:$("#passwd").val()},function(data){
 
              if(data=="success"){
@@ -72,8 +98,16 @@ include 'bin/validate.php';
                alert("Something went wrong!Please refresh your browser");
              }
            });
+        });
 
-         });
+        $("#reg").click(function(){
+              $("#log_page").hide();
+              $("#register_page").show();
+        });
+        $("#log").click(function(){
+              $("#register_page").hide();
+              $("#log_page").show();
+          });
 });
 
 
