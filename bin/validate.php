@@ -20,8 +20,15 @@ function validate()
         $_SESSION["userid"]=$userid;
         $_SESSION["type"]=$r["type"];
         $_SESSION["email"]=$r["email"];
-      }
-      return 1;
+        }
+        else {
+          $qry="select * from login_details where `userid`='$userid'";
+          $rs=$conn->query($qry);
+          $r=$rs->fetch_assoc();
+          $_SESSION["type"]=$r["type"];
+          $_SESSION["email"]=$r["email"];
+        }
+     return 1;
     }
     else {
       setcookie("PHPSESSID","",time()-3600);

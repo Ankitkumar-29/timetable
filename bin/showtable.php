@@ -21,9 +21,9 @@
    ?>
      </ul>
 
-  <div class="row" style="height:500px;overflow-y:scroll">
+  <div class="row" style=" height:500px;overflow:scroll;">
   <div class="col s12">
-    <table  class="highlight">
+    <table  class="bordered">
 
       <thead id="tb_head">
 
@@ -32,7 +32,6 @@
 
       </tbody>
   </table>
-
 
   </div>
 </div>
@@ -54,12 +53,14 @@
         $(".classid").click(function(){
           var cid =$(this).data("value");
           var x=1;
-          alert(cid);
           $.post("classtt.php",{clid:cid},function(data){
             //alert(x);
+            $("#tb_head").empty();
+            $("#table_container").empty();
              $.each(data,function(key,value){
                if(x==1)
                {
+
                     $("#tb_head").append("<tr>");
                       $.each(value,function(colname,colvalue){
                          console.log(colname);
