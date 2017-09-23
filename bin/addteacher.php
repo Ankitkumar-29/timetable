@@ -7,7 +7,7 @@
       <form class="login-form">
         <div class="input-field">
           <label for="id">Teacher Id</label>
-          <input id="id" type="text">
+          <input id="id" type="text" autofocus>
         </div>
         <div class="input-field" >
           <label for="name">Name</label>

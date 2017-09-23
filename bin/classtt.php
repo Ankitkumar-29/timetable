@@ -6,7 +6,7 @@ header("Content-type:text/javascript");
    include 'dbconn.php';
    $cls =$_POST['clid'];
   //  echo $cls;
-   $qry="SELECT * FROM `$cls` ORDER BY FIELD(Day,'MONDAY' , 'Tuesday' ,'Wednesday' , 'Thrusday' ,'Friday','Saturday' )";
+   $qry="SELECT * FROM `$cls` ORDER BY FIELD(Day,'Monday' , 'Tuesday' ,'Wednesday' , 'Thrusday' ,'Friday','Saturday' )";
    $rs=$conn->query($qry);
    if(mysqli_num_rows($rs)>0){
       while($r=$rs->fetch_assoc())
