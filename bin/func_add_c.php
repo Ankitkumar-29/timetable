@@ -7,11 +7,16 @@ if(isset($_POST["cls"]) && isset($_POST["lec"]) && isset($_POST["rec"]) && isset
       include 'dbconn.php';
       $cname=$_POST["cls"]."-".$_POST["sec"];
       $lname = array("One", "Two", "Three" ,"Four","Five","Six","Seven" ,"Eight" ,"Nine" ,"Ten");
-      $day =array('MONDAY' , 'Tuesday' ,'Wednesday' , 'Thrusday' ,'Friday','Saturday');
+      $day =array('Monday' , 'Tuesday' ,'Wednesday' , 'Thrusday' ,'Friday','Saturday');
       $temp="";
        $qry="INSERT INTO `Classes`(`classid`) VALUES ('$cname')";
        $conn->query($qry);
-
+       $subcid="SUB_".$cname;
+       $qry="CREATE TABLE `$subcid` (
+         sub Varchar(10)
+       )";
+       echo $qry;
+       $conn->query($qry);
        $qry="CREATE TABLE `$cname` (
           Day  Varchar(10),
           PRIMARY KEY (DAY)

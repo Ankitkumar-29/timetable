@@ -32,10 +32,10 @@
           }
           else if (data=="failed")
           {
-              alert("Teacher already exist");
+              alert("Please enter a valid Id");
           }
           else {
-            alert("Please enter all the fields");
+            alert("Something Went Wrong Please refresh your browser");
           }
         });
       });

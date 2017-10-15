@@ -4,7 +4,7 @@
 </a>
 
  <!-- Dropdown Structure -->
- <ul id='tt_list' class='dropdown-content'>
+ <ul id='tt_list' class='dropdown-content' style="max-height:200px; overflow-y:scroll;">
    <?php
    include "dbconn.php";
    $qry="SELECT * FROM `Classes` ";
@@ -21,8 +21,8 @@
    ?>
      </ul>
 
-  <div class="row" style=" height:500px;overflow:scroll;">
-  <div class="col s12">
+  <div class="row" >
+  <div class="col s12" style=" height:355px;overflow:scroll; ">
     <table id="tab" class="bordered">
 
       <thead id="tb_head">
@@ -35,11 +35,23 @@
 
   </div>
 </div>
-<a id="update" class="btn"><span>UPDATE</span></a>
+<div id="load" class="progress teal darken-4 col l12">
+    <div class="indeterminate teal "></div>
+</div>
+<div class="row">
+  <div class="col l3">
+    <a id="update" class="btn"><span>UPDATE</span></a>
+  </div>
+  <div class="col l3">
+    <a id="allot" class="btn"><span>Teacher</span></a>
+  </div>
+</div>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
-    console.log("yo bby");
+    //console.log("yo ");
+        $("#load").hide();
         $('.dropdown-button').dropdown({
             inDuration: 300,
             outDuration: 225,
@@ -97,14 +109,19 @@
       },"json");
 
   });
-
+  $('#allot').click(function(){
+    $("#maincontainer").load("allot_teacher.php");
+  });
   $('#update').click(function(){
+        $("#load").show();
     $.post("func_update_class.php",{
             x:jason,
             cid:cid,
             col_n:col_n
             },function(data){
         console.log(data);
+            $("#load").hide();
+            console.log(data);
         if(data=="success")
         {
           alert("Table Updated Successfully");
