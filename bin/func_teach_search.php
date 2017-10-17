@@ -1,13 +1,19 @@
 <?php
 header("Content-type:text/javascript");
 
-    include 'dbconn.php'
-    $key=$_GET['key'];
+    include 'dbconn.php';
+    $key=$_POST['key'];
     $array = array();
-    $query=mysql_query("select * from `techers` where `name` LIKE '%{$key}%'");
-    while($row=mysql_fetch_assoc($query))
-    {
-      $array[] = $row['title'];
+    $qry="select * from `teachers` where `name` LIKE '%$key%'";
+//  echo $qry;
+    $res=$conn->query($qry);
+    if(mysqli_num_rows($res)>0){
+      $i=0;
+      while($r=$res->fetch_assoc())
+        {
+          $array[$i]=$r;
+          $i++;
+        }
     }
-    echo json_encode($array);
+   echo json_encode($array);
 ?>

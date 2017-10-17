@@ -75,6 +75,7 @@ include 'dbconn.php';
 
        $("#logout").click(function() {
          var x=Cookies.get("userid");
+         //alert(x);
          $.post("logout.php",{id:x},function(data){
             if(data==1)
             {

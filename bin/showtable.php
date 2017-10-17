@@ -43,7 +43,7 @@
     <a id="update" class="btn"><span>UPDATE</span></a>
   </div>
   <div class="col l3">
-    <a id="allot" class="btn"><span>Teacher</span></a>
+    <a id="allot" class="btn"><span>Allot Teacher</span></a>
   </div>
 </div>
 
@@ -52,6 +52,8 @@
   $(document).ready(function(){
     //console.log("yo ");
         $("#load").hide();
+        $("#update").hide();
+        $("#allot").hide();
         $('.dropdown-button').dropdown({
             inDuration: 300,
             outDuration: 225,
@@ -66,12 +68,17 @@
         var cid="";
         $(".classid").click(function(){
           cid =$(this).data("value");
+          $("#update").show();
+          $("#allot").show();
           var x=1;
+         Cookies.set("clid",cid);
+          //alert(Cookies.get("clid"));
           $.post("classtt.php",{clid:cid},function(data){
             var row=0;
             var col=0;
             $("#tb_head").empty();
             $("#table_container").empty();
+              //console.log(data);
              $.each(data,function(key,value){
                if(x==1)
                {
@@ -84,7 +91,7 @@
                            col_n[index]=colname;
                            index++;
                       });
-                      console.log(col_n);
+                      //console.log(col_n);
                     $("#tb_head").append("</tr>");
                     x=x+1;
               }
@@ -99,7 +106,7 @@
                      col=col+1;
                 });
                 jason[row]=r1;
-                //console.log(jason);
+                // console.log(jason);
                 row=row+1;
                 $("#table_container").append("</tr>");
                 //console.log("Created");
@@ -121,7 +128,7 @@
             },function(data){
         console.log(data);
             $("#load").hide();
-            console.log(data);
+            //console.log(data);
         if(data=="success")
         {
           alert("Table Updated Successfully");
@@ -140,9 +147,9 @@
       var par1=$(this).parent();
       var row=$(this).data("row");
       var col=$(this).data("col");
-      console.log(row+"  "+col);
+      //console.log(row+"  "+col);
       if(col>0){
-        //console.log("clicked");
+      //  console.log(jason[row][col]);
       par1.html("<input type='text' class='edit' data-row='"+row+"' data-col='"+col+"' value='"+jason[row][col]+"'>");
       }
       $('.edit').focus();
@@ -166,29 +173,6 @@
   }
 
 
-  // function abc(testjson) {
-  //   $(".random1").on("click",function(){
-  //     // console.log($(this).data("value1"));
-  //     var par=$(this).parent();
-  //     var row=$(this).data("row");
-  //     var col=$(this).data("col");
-  //     // console.log(par);
-  //     par.html("<input type='text' class='ss' id='t1' value='"+testjson[row][col]+"' autofocus>");
-  //     $(".ss").focus();
-  //     xyz(row,col,testjson);
-  //   });
-  // }
-  //
-  // function xyz(row,col,testjson){
-  //   $(".ss").focusout(function(){
-  //     var par=$(this).parent();
-  //     if($(this).val()!=""){
-  //       testjson[row][col]=$(this).val();
-  //     }
-  //     par.html("<span class='random1' data-row='"+row+"' data-col='"+col+"'>"+testjson[row][col]+"</span>");
-  //     abc(testjson);
-  //   });
-  //
-  // }
+
 
 </script>
