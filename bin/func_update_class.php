@@ -23,6 +23,7 @@ $cid = $_POST['cid'];
       }
     $d++;
   }
+
   $qry="DELETE FROM `dummy`";
   $conn->query($qry);
   $qry="SELECT column_name From information_schema.columns WHERE TABLE_NAME= '$cid'";
@@ -39,29 +40,29 @@ $cid = $_POST['cid'];
           $rset=$conn->query($qry);
           if(mysqli_num_rows($rset)>0)
           {
-
-          while($row=$rset->fetch_array())
-          {
+            while($row=$rset->fetch_array())
+            {
               $qry="INSERT INTO `dummy`(`sub`) VALUES ('$row[0]')";
               $conn->query($qry);
-
-          }
+           }
         }
       }
 
     }
   }
+  $cname="SUB_".$cid;
+  $qry="DELETE FROM `$cname`";
+  $conn->query($qry);
   $qry="SELECT DISTINCT `sub` From `dummy`";
   $rs=$conn->query($qry);
   if(mysqli_num_rows($rs)>0)
   {
     while($r=$rs->fetch_array())
     {
-
-       $cname="SUB_".$cid;
-      // echo $r[0];
-       $qry="INSERT INTO `$cname`(`sub`) VALUES ('$r[0]')";
+      if($r[0]!="-"){
+       $qry="INSERT INTO `$cname`(`sub`,`name`) VALUES ('$r[0]','-')";
        $conn->query($qry);
+     }
     }
   }
  echo "success";

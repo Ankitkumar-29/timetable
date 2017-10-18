@@ -22,6 +22,7 @@ else {
         $cls=$row['classid'];
         $qry="CREATE Table `$name` like `$cls`";
         $conn->query($qry);
+        
         for($count=0;$count<6;$count++)
         {
           $qry="INSERT into `$name`(Day) Values('$day[$count]')";

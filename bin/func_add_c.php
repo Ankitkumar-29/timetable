@@ -13,9 +13,10 @@ if(isset($_POST["cls"]) && isset($_POST["lec"]) && isset($_POST["rec"]) && isset
        $conn->query($qry);
        $subcid="SUB_".$cname;
        $qry="CREATE TABLE `$subcid` (
-         sub Varchar(10)
+         sub Varchar(10),
+         name Varchar(50),
+         PRIMARY KEY (sub)
        )";
-       echo $qry;
        $conn->query($qry);
        $qry="CREATE TABLE `$cname` (
           Day  Varchar(10),

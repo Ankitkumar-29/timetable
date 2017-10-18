@@ -46,6 +46,7 @@
             },function(data){
             //  alert(data);
             $("#load").hide();
+            console.log(data);
               if(data=="unfilled")
               {
                 alert("Please fill all the details");

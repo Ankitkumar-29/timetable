@@ -4,6 +4,15 @@
   </div>
 
   </div>
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">three</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+  </ul>
+
   <div class="col s12 m6 l6 ">
     <table id="table" class="bordered ">
 
@@ -17,26 +26,12 @@
     </table>
 
   </div>
-    <!-- <div class="col s12 m6 l6">
-     <div class="row">
-        <div class="sub input-field col s6 m6 l6">
-          <input  value="" type="text" readonly>
-        </div>
-        <div class="input-field col s6 m6 l6">
-            <input class="tech" type="text" value="">
-        </div>
-     </div>
-    </div> -->
+  <div class="row">
+    <div class="col s12 m6 l6">
+    <a id="upteach" class="btn" >UPDATE</a>
+    </div>
 
-
-    <!-- <div class="input-field col s12 m6 l3">
-       <i class="material-icons prefix">account_circle</i>
-       <input id="search" type="text">
-       <label for="search"></label>
-     </div>
-   </div> -->
-
-
+  </div>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -65,7 +60,7 @@
             });
               //console.log(r);
             jason[row]=r;
-           console.log(jason);
+           //console.log(jason);
             row=row+1;
           $("#tb_container").append("</tr>");
           });
@@ -73,6 +68,21 @@
      },"json");
     //alert(x);
 
+    $("#upteach").click(function(){
+      $.post("func_insert_teach.php",{
+        content:jason,
+        sclid:x
+        },function(data){
+        console.log(data);
+        if(data=="success")
+        {
+          alert("Teacher added Successfully");
+        }
+        else {
+          alert("Something went wrong");
+        }
+      });
+    });
 
 
     function edit_table(jason){
@@ -85,7 +95,9 @@
       //  console.log(row+"  "+col);
         if(col>0){
           //console.log(jason[row][col]);
-        par1.html("<input type='text' class='edit search' data-row='"+row+"' data-col='"+col+"' value='"+jason[row][col]+"'>");
+        par1.html("<input type='text' class='edit search autocomplete' data-row='"+row+"' data-col='"+col+"' value='"+jason[row][col]+"'>"+
+        "<div id='main_content'></div>"
+        );
         }
         $('.edit').focus();
         search();
@@ -122,14 +134,15 @@
         else {
           srch=$(this).val();
         }
-        console.log(srch);
-      $.post("func_teach_search.php",{key:srch},function(data){
-        //alert(data);
-        console.log(data);
-      },"json");
-        //console.log(srch);
-    });
 
+    $.post("func_teach_search.php",{key:srch},function(content){
+        $('input.autocomplete').autocomplete({
+          data:content,
+          limit: 3, // The max amount of results that can be shown at once. Default: Infinity.
+          minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+          });
+      },"json");
+    });
   }
 
  $(".tech").click(function(){

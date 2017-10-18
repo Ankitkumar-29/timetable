@@ -23,7 +23,7 @@
   $(document).ready(function(){
 
       $("#add").click(function(){
-        alert("click");
+        //alert("click");
         $.post("func_add_t.php",{name:$("#name").val(),id:$("#id").val()},function(data){
           alert(data);
           if(data=="success")
